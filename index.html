@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="sq">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ditari Online regjistri i mësuesit — administroni të dhënat e nxënësve, notat, vërejtjet dhe mungesat."
+    />
+    <meta name="theme-color" content="#3c6b7d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Regjistri" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>Regjistri i mësuesit | Ditari Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app-config.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Ditari Online - faqja kryesore">
+          <span class="brand-mark">D</span>
+          <span>Ditari Online</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Navigimi kryesor">
+          <a href="#teacher-panel">Shto nxënës</a>
+          <a href="#test-calendar">Kalendari i testeve</a>
+          <a href="#student-table">Të gjitha të dhënat</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Regjistri shkollor</p>
+            <h1 id="hero-title">Të gjitha të dhënat e nxënësve në një regjistër.</h1>
+            <p class="lead">
+              Shtoni të dhënat e nxënësve dhe shikoni notat, vërejtjet, mungesat dhe kodet e hyrjes për prindërit në regjistrin e plotë të klasës.
+            </p>
+
+            <div class="cta-row">
+              <a class="primary-btn" href="#teacher-panel">Shto të dhënat e nxënësit</a>
+              <a class="secondary-btn" href="#student-table">Shiko të gjitha të dhënat</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="teacherAuth" class="panel auth-panel" aria-labelledby="teacher-auth-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Hyrje e sigurt</p>
+              <h2 id="teacher-auth-title">Hyrja e mësuesit</h2>
+            </div>
+          </div>
+          <form id="teacherLoginForm" class="teacher-login-form">
+            <label>
+              <span>Email-i i mësuesit</span>
+              <input id="teacherEmail" type="email" autocomplete="username" required />
+            </label>
+            <label>
+              <span>Fjalëkalimi</span>
+              <input id="teacherPassword" type="password" autocomplete="current-password" required />
+            </label>
+            <button id="teacherLoginButton" type="submit" class="primary-btn">Hyr në regjistër</button>
+          </form>
+          <p id="teacherAuthMessage" class="form-message" role="status" aria-live="polite"></p>
+          <div id="teacherSignedIn" class="signed-in-bar" hidden>
+            <span id="teacherIdentity"></span>
+            <button id="teacherLogout" type="button" class="secondary-btn">Dil nga llogaria</button>
+          </div>
+          <div id="localImportPanel" class="local-import-panel" hidden>
+            <p>Importoni të dhënat e mëparshme për t’i ndarë përmes databazës online.</p>
+            <button id="importLocalData" type="button" class="secondary-btn">Importo të dhënat lokale</button>
+            <a class="legacy-export-link" href="legacy-export.html">Eksporto të dhënat nga regjistri i vjetër</a>
+            <label>
+              <span>Skedari i të dhënave të eksportuara</span>
+              <input id="localImportFile" type="file" accept=".json,application/json" />
+            </label>
+            <button id="importFileData" type="button" class="secondary-btn" disabled>Importo skedarin</button>
+          </div>
+        </section>
+
+        <section id="teacherWorkspace" class="workspace" aria-label="Kontrollet e regjistrit të mësuesit" hidden>
+          <div class="panel" id="teacher-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Regjistrimi i nxënësit</p>
+                <h2>Shto një nxënës</h2>
+              </div>
+            </div>
+
+            <form id="studentForm" class="student-form">
+              <div class="form-grid">
+                <label>
+                  <span>Emri i nxënësit</span>
+                  <input id="studentName" name="studentName" type="text" placeholder="Shkruani emrin e nxënësit" required />
+                </label>
+
+                <label>
+                  <span>Klasa</span>
+                  <select id="studentClass" name="studentClass">
+                    <option value="1/1">1/1</option>
+                    <option value="1/2">1/2</option>
+                    <option value="1/3">1/3</option>
+                    <option value="1/4">1/4</option>
+                    <option value="1/5">1/5</option>
+                    <option value="1/6">1/6</option>
+                    <option value="1/7">1/7</option>
+                    <option value="1/8">1/8</option>
+                    <option value="1/9">1/9</option>
+                    <option value="2/1">2/1</option>
+                    <option value="2/2">2/2</option>
+                    <option value="2/3">2/3</option>
+                    <option value="2/4">2/4</option>
+                    <option value="2/5">2/5</option>
+                    <option value="2/6">2/6</option>
+                    <option value="2/7">2/7</option>
+                    <option value="2/8">2/8</option>
+                    <option value="2/9">2/9</option>
+                    <option value="3/1">3/1</option>
+                    <option value="3/2">3/2</option>
+                    <option value="3/3">3/3</option>
+                    <option value="3/4">3/4</option>
+                    <option value="3/5">3/5</option>
+                    <option value="3/6">3/6</option>
+                    <option value="3/7">3/7</option>
+                    <option value="3/8">3/8</option>
+                    <option value="3/9">3/9</option>
+                    <option value="4/1">4/1</option>
+                    <option value="4/2">4/2</option>
+                    <option value="4/3">4/3</option>
+                    <option value="4/4">4/4</option>
+                    <option value="4/5">4/5</option>
+                    <option value="4/6">4/6</option>
+                    <option value="4/7">4/7</option>
+                    <option value="4/8">4/8</option>
+                    <option value="4/9">4/9</option>
+                    <option value="5/1">5/1</option>
+                    <option value="5/2">5/2</option>
+                    <option value="5/3">5/3</option>
+                    <option value="5/4">5/4</option>
+                    <option value="5/5">5/5</option>
+                    <option value="5/6">5/6</option>
+                    <option value="5/7">5/7</option>
+                    <option value="5/8">5/8</option>
+                    <option value="5/9">5/9</option>
+                    <option value="6/1">6/1</option>
+                    <option value="6/2">6/2</option>
+                    <option value="6/3">6/3</option>
+                    <option value="6/4">6/4</option>
+                    <option value="6/5">6/5</option>
+                    <option value="6/6">6/6</option>
+                    <option value="6/7">6/7</option>
+                    <option value="6/8">6/8</option>
+                    <option value="6/9">6/9</option>
+                    <option value="7/1">7/1</option>
+                    <option value="7/2">7/2</option>
+                    <option value="7/3">7/3</option>
+                    <option value="7/4">7/4</option>
+                    <option value="7/5">7/5</option>
+                    <option value="7/6">7/6</option>
+                    <option value="7/7">7/7</option>
+                    <option value="7/8">7/8</option>
+                    <option value="7/9">7/9</option>
+                    <option value="8/1">8/1</option>
+                    <option value="8/2">8/2</option>
+                    <option value="8/3">8/3</option>
+                    <option value="8/4">8/4</option>
+                    <option value="8/5">8/5</option>
+                    <option value="8/6">8/6</option>
+                    <option value="8/7">8/7</option>
+                    <option value="8/8">8/8</option>
+                    <option value="8/9">8/9</option>
+                    <option value="9/1">9/1</option>
+                    <option value="9/2">9/2</option>
+                    <option value="9/3">9/3</option>
+                    <option value="9/4">9/4</option>
+                    <option value="9/5">9/5</option>
+                    <option value="9/6">9/6</option>
+                    <option value="9/7">9/7</option>
+                    <option value="9/8">9/8</option>
+                    <option value="9/9">9/9</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>Mungesat</span>
+                  <input id="absenceCount" name="absenceCount" type="number" min="0" max="30" value="0" required />
+                </label>
+
+                <label>
+                  <span>Kodi i hyrjes për prindin</span>
+                  <input id="parentCode" name="parentCode" type="text" readonly value="DT-1042" />
+                </label>
+
+                <label>
+                  <span>Vlerësimi i mësuesit</span>
+                  <select id="remark" name="remark">
+                    <option value="Excellent">Shkëlqyeshëm</option>
+                    <option value="Good">Mirë</option>
+                    <option value="Satisfactory">Kënaqshëm</option>
+                    <option value="Needs improvement">Nevojitet përmirësim</option>
+                    <option value="Late submissions">Dorzime me vonesë</option>
+                    <option value="Excellent participation">Pjesëmarrje e shkëlqyeshme</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                <span>Shënimi i mësuesit</span>
+                <textarea id="teacherNote" name="teacherNote" rows="4" placeholder="Shtoni vërejtje ose komente..."></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button type="submit" class="primary-btn">Shto nxënësin në klasë</button>
+              </div>
+              <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+        </section>
+
+        <section class="panel test-calendar-panel" id="test-calendar" aria-labelledby="calendar-title" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Orari i klasës</p>
+              <h2 id="calendar-title">Kalendari i testeve</h2>
+            </div>
+          </div>
+
+          <form id="testCalendarForm" class="test-calendar-form">
+            <label>
+              <span>Data e testit</span>
+              <input id="testDate" name="testDate" type="date" required />
+            </label>
+            <label>
+              <span>Klasa</span>
+              <select id="testClass" name="testClass" required>
+                <option value="">Zgjidhni klasën</option>
+              </select>
+            </label>
+            <label>
+              <span>Lënda</span>
+              <input id="testSubject" name="testSubject" type="text" maxlength="80" placeholder="p.sh. Matematikë" required />
+            </label>
+            <label>
+              <span>Tematika ose shënimi <small>(opsionale)</small></span>
+              <input id="testDetails" name="testDetails" type="text" maxlength="180" placeholder="Për çfarë duhet të përgatiten nxënësit?" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Shto datën e testit</button>
+            </div>
+            <p id="calendarMessage" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="calendar-layout">
+            <div class="month-calendar" aria-label="Kalendari mujor i testeve">
+              <div class="calendar-toolbar">
+                <button id="previousMonth" class="ghost-btn calendar-nav" type="button" aria-label="Muaji i kaluar">‹</button>
+                <h3 id="calendarMonth" aria-live="polite"></h3>
+                <button id="nextMonth" class="ghost-btn calendar-nav" type="button" aria-label="Muaji i ardhshëm">›</button>
+              </div>
+              <div class="calendar-grid calendar-weekdays" aria-hidden="true">
+                <span>Hën</span><span>Mar</span><span>Mër</span><span>Enj</span><span>Pre</span><span>Sht</span><span>Die</span>
+              </div>
+              <div id="calendarDays" class="calendar-grid calendar-days"></div>
+            </div>
+
+            <section class="upcoming-tests" aria-labelledby="upcoming-title">
+              <h3 id="upcoming-title">Testet e ardhshme</h3>
+              <div id="upcomingTestList" class="test-event-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="panel table-panel" id="student-table" aria-labelledby="table-title" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Regjistri aktiv</p>
+              <h2 id="table-title">Ditari i notave të klasës</h2>
+            </div>
+            <span id="studentCount" class="table-badge">0 nxënës</span>
+          </div>
+
+          <div class="register-filters">
+            <label class="class-filter">
+              <span>Zgjidhni klasën</span>
+              <select id="classFilter" aria-label="Filtro të dhënat sipas klasës">
+                <option value="">Zgjidhni një klasë</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="grid-hint">Çdo lëndë ka kolonën e vet. Vendosni një notë nga 1 deri në 5 për secilin nxënës.</p>
+          <div class="table-wrap">
+            <table class="gradebook-table">
+              <thead id="gradebookHead"></thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
